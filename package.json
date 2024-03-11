@@ -12,12 +12,15 @@
     "format": "prettier --write \"**/*.{js,ts,tsx}\" --ignore-path .prettierignore"
   },
   "dependencies": {
+    "@radix-ui/react-navigation-menu": "^1.1.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "framer-motion": "^11.0.8",
     "lucide-react": "^0.344.0",
     "next": "14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "simplex-noise": "^4.0.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
   },

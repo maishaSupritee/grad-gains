@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { Provider } from "@/lib/types";
 import discordLogo from "@/public/images/discord-logo.svg";
 import { signIn } from "auth";
 
 export default function SigninPage() {
-  type Provider = "discord" | "github";
   async function handleSignin(formData: FormData) {
     "use server";
-    const provider: Provider = formData.get("provider") as Provider;
+    const provider = formData.get("provider") as Provider;
     await signIn(provider);
   }
 

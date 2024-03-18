@@ -45,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
         {icon && (
           <span className="mr-2">
-            <Image src={icon} alt="Icon" width={24} height={24} />
+            <Image src={icon} alt="Icon" width={36} height={36} />
           </span>
         )}
         {props.children}

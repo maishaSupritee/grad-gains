@@ -1,12 +1,9 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import Discord from "next-auth/providers/discord";
+import Google from "next-auth/providers/google";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [Discord],
-  callbacks: {
-    async signIn({ user }) {
-      // Redirect to dashboard after successful sign-in
-      return "/dashboard";
-    },
-  },
-});
+const config = {
+  providers: [Discord, Google],
+} satisfies NextAuthConfig;
+
+export const { handlers, auth, signIn, signOut } = NextAuth(config);

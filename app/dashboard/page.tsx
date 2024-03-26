@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { auth, signOut } from "auth";
+import Link from "next/link";
+
 
 export default async function Dashboard() {
   const session = await auth();
@@ -22,6 +24,9 @@ export default async function Dashboard() {
                 Sign Out
               </Button>
             </form>
+            <Link href={"/news"} className="text-2xl">
+              Click here for News
+             </Link>
           </div>
         ) : (
           ""

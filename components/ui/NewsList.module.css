@@ -1,0 +1,18 @@
+.newsList {
+    margin: 20px;
+  }
+  
+  .article {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+  
+  .article h3 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .article p {
+    margin: 5px 0;
+    color: #666666;
+  }

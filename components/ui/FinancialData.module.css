@@ -1,0 +1,16 @@
+  .financialData {
+    margin: 20px;
+  }
+  
+  .dataItem {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+  
+  .dataItem span {
+    font-weight: bold;
+    color: #333;
+  }
+  

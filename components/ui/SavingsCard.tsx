@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Savings } from "@/lib/types";
+import { type Savings } from "@/lib/types";
 import savingsIcon from "@/public/images/savings-icon.svg";
 import Image from "next/image";
 

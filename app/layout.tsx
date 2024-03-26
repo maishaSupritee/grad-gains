@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Grad Gains", description: "Grad Gain
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={`${inter.className} min-h-screen antialiased`}>{children}</body>
+      <body className={`${inter.className} min-h-screen antialiased bg-white dark:bg-black`}>{children}</body>
     </html>
   );
 }

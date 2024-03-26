@@ -1,4 +1,3 @@
-import { NavBar } from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
 import SavingsCard from "@/components/ui/SavingsCard";
 
@@ -18,9 +17,8 @@ export default function SavingsPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-5">
-      <NavBar />
-      <div className="flex flex-row items-center justify-between px-5">
+    <div className="flex flex-col gap-5 px-8 pt-20">
+      <div className="flex flex-row items-center justify-between">
         <Button>Add New</Button>
         <div className="justify-end">Total Amount: $200</div>
       </div>

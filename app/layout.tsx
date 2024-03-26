@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Grad Gains", description: "Grad Gain
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html suppressHydrationWarning lang="en">
-      <body className={`${inter.className} min-h-screen antialiased`}>
+      <body className={`${inter.className} min-h-screen antialiased bg-white dark:bg-black`}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <div className="h-screen">
             <Navbar />

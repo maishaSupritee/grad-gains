@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));
@@ -33,6 +33,12 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        maxMd: { max: "768px" },
+        xl: { min: "1130px" },
+        "2xl": { min: "1330px" },
+        "3xl": { min: "1730px" },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

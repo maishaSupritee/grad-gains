@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import { type Session } from "next-auth";
+import Link from "next/link";
 import { Suspense } from "react";
 import {
   DropdownMenu,
@@ -31,10 +32,12 @@ async function UserButtonContent({ session }: { session?: Session | null }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-medium leading-none">{user.name}</p>
-              <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
-            </div>
+            <Link href="/profile">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-medium leading-none">{user.name}</p>
+                <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+              </div>
+            </Link>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <form

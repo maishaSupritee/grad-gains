@@ -5,3 +5,12 @@ export interface Savings {
   date: Date;
   amount: number;
 }
+
+export interface Investments {
+  title: string;
+  amount: number;
+  change_today: number;
+  current_amount: number;
+  original_investment: number;
+  url: string;
+}

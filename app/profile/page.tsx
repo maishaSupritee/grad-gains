@@ -106,7 +106,7 @@ export default async function ProfilePage() {
         )}
         <div className="flex flex-col">
           <h1 className="flex-grow text-3xl font-semibold">{user && user.name}</h1>
-          <h2 className="font-thin">{user && user.email}</h2>
+          <h2>{user && user.email}</h2>
         </div>
         <div className="flex flex-col gap-1 pl-20">
           <h2 className="text-2xl font-semibold">Friends</h2>

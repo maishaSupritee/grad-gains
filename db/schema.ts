@@ -1,5 +1,15 @@
+import { TransactionType } from "@/lib/types";
 import type { AdapterAccount } from "@auth/core/adapters";
-import { integer, pgTable, primaryKey, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  numeric,
+  pgTable,
+  primaryKey,
+  serial,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -8,6 +18,7 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 });
+type Users = typeof users.$inferSelect;
 
 export const accounts = pgTable(
   "account",
@@ -50,3 +61,30 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const savings = pgTable("savings", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  type: varchar("type", { length: 255 }).notNull(),
+  lastTransaction: timestamp("last_transaction", { withTimezone: true, mode: "date" }),
+});
+
+type Savings = typeof savings.$inferSelect;
+type NewSavings = typeof savings.$inferInsert;
+
+export const transactions = pgTable("transactions", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  savingsId: integer("savings_id")
+    .notNull()
+    .references(() => savings.id),
+  amount: numeric("amount", { precision: 12, scale: 2 }).notNull(),
+  type: varchar("type", { length: 3 }).$type<TransactionType>().notNull(),
+});
+
+type Transaction = typeof transactions.$inferSelect;
+type NewTransaction = typeof transactions.$inferInsert;

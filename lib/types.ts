@@ -5,3 +5,5 @@ export interface Savings {
   date: Date;
   amount: number;
 }
+
+export type TransactionType = "in" | "out";

@@ -14,3 +14,5 @@ export interface Investments {
   original_investment: number;
   url: string;
 }
+
+export type TransactionType = "in" | "out";

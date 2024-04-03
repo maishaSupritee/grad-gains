@@ -29,10 +29,16 @@ export default async function SavingsPage() {
           0
         );
 
+        // Get the date of the very last transaction if transactionsList is not empty
+        const lastTransaction =
+          transactionsList.length > 0
+            ? transactionsList[transactionsList.length - 1]?.date || null
+            : null;
+
         // Create a TransactionDetail object for each savings
         const transactionData: TransactionDetail = {
           totalAmount: totalAmount,
-          lastTransaction: null, // Assuming last transaction is null for now
+          lastTransaction: lastTransaction,
         };
 
         return {

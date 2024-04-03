@@ -18,7 +18,7 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 });
-type Users = typeof users.$inferSelect;
+export type Users = typeof users.$inferSelect;
 
 export const accounts = pgTable(
   "account",
@@ -71,8 +71,8 @@ export const savings = pgTable("savings", {
   lastTransaction: timestamp("last_transaction", { withTimezone: true, mode: "date" }),
 });
 
-type Savings = typeof savings.$inferSelect;
-type NewSavings = typeof savings.$inferInsert;
+export type Savings = typeof savings.$inferSelect;
+export type NewSavings = typeof savings.$inferInsert;
 
 export const transactions = pgTable("transactions", {
   id: serial("id").primaryKey(),
@@ -86,5 +86,5 @@ export const transactions = pgTable("transactions", {
   type: varchar("type", { length: 3 }).$type<TransactionType>().notNull(),
 });
 
-type Transaction = typeof transactions.$inferSelect;
-type NewTransaction = typeof transactions.$inferInsert;
+export type Transaction = typeof transactions.$inferSelect;
+export type NewTransaction = typeof transactions.$inferInsert;

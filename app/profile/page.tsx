@@ -1,5 +1,8 @@
 import { auth } from "@/auth";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Savings } from "@/db/schema";
+import { CalculateTotalSavings, GetSavingsData } from "@/lib/savingsQueries";
+import { TransactionDetail } from "@/lib/types";
 import profileIcon from "@/public/images/profile-icon.svg";
 import profitIcon from "@/public/images/profit-icon.svg";
 import savingsIcon from "@/public/images/savings-icon.svg";
@@ -8,20 +11,14 @@ import Image from "next/image";
 export default async function ProfilePage() {
   const session = await auth();
   const user = session?.user;
-  const savingsList = [
-    {
-      title: "Home",
-      amount: 100,
-    },
-    {
-      title: "Wedding",
-      amount: 100,
-    },
-  ];
-  const savingsCardData = {
-    amount: 200,
-    savings: savingsList,
-  };
+  let totalSavings: number = 0;
+  let savingsDataWithTransactions: { savingsData: Savings; transactionData: TransactionDetail }[] =
+    [];
+
+  if (user && user.id) {
+    savingsDataWithTransactions = await GetSavingsData(user.id);
+    totalSavings = await CalculateTotalSavings(user.id);
+  }
 
   function SavingsCard() {
     return (
@@ -30,15 +27,15 @@ export default async function ProfilePage() {
           <CardHeader className="items-center gap-3 text-2xl font-semibold">
             <div className="flex items-center">
               <span>Savings Till Date: </span>
-              <span className="pl-2 text-primary">${savingsCardData.amount}</span>
+              <span className="pl-2 text-primary">${totalSavings.toFixed(2)}</span>
             </div>
             <Image src={savingsIcon} alt="Icon" width={40} height={40}></Image>
           </CardHeader>
           <CardContent>
-            {savingsList.map((savingsData, index) => (
+            {savingsDataWithTransactions.map((data, index) => (
               <Card key={index} className="mb-2">
                 <CardHeader className="items-center">
-                  {savingsData.title}: ${savingsData.amount}
+                  {data.savingsData.type}: ${data.transactionData.totalAmount.toFixed(2)}
                 </CardHeader>
               </Card>
             ))}

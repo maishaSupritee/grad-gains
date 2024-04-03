@@ -1,58 +1,20 @@
 import { auth } from "@/auth";
 import SavingsCard from "@/components/ui/SavingsCard";
 import { Button } from "@/components/ui/button";
-import { db } from "@/db";
-import { savings, transactions, type Savings } from "@/db/schema";
+import { type Savings } from "@/db/schema";
+import { CalculateTotalSavings, GetSavingsData } from "@/lib/savingsQueries";
 import { TransactionDetail } from "@/lib/types";
-import { eq } from "drizzle-orm";
 
 export default async function SavingsPage() {
   const session = await auth();
-  let savingsList: Savings[] = [];
+  const user = session?.user;
   let totalSavings: number = 0;
   let savingsDataWithTransactions: { savingsData: Savings; transactionData: TransactionDetail }[] =
     [];
 
-  if (session && session.user && session.user.id) {
-    savingsList = await db.select().from(savings).where(eq(savings.userId, session.user.id));
-
-    // Fetch transactions and calculate total amount for each savings
-    savingsDataWithTransactions = await Promise.all(
-      savingsList.map(async (savingsData) => {
-        const transactionsList = await db
-          .select()
-          .from(transactions)
-          .where(eq(transactions.savingsId, savingsData.id));
-
-        const totalAmount = transactionsList.reduce(
-          (sum, transaction) => sum + parseFloat(transaction.amount),
-          0
-        );
-
-        // Get the date of the very last transaction if transactionsList is not empty
-        const lastTransaction =
-          transactionsList.length > 0
-            ? transactionsList[transactionsList.length - 1]?.date || null
-            : null;
-
-        // Create a TransactionDetail object for each savings
-        const transactionData: TransactionDetail = {
-          totalAmount: totalAmount,
-          lastTransaction: lastTransaction,
-        };
-
-        return {
-          savingsData: savingsData,
-          transactionData: transactionData,
-        };
-      })
-    );
-
-    // Calculate the total amount across all savings
-    totalSavings = savingsDataWithTransactions.reduce(
-      (sum, { transactionData }) => sum + transactionData.totalAmount,
-      0
-    );
+  if (user && user.id) {
+    savingsDataWithTransactions = await GetSavingsData(user.id);
+    totalSavings = await CalculateTotalSavings(user.id);
   }
 
   return (

@@ -26,7 +26,7 @@ export default function InvestmentsPage() {
     <div className="flex flex-col gap-5 px-8 pt-20">
       <div className="flex flex-row items-center justify-between">
         <Button>Add New</Button>
-        <div className="font-bold justify-end text-lg">Total Profit: $100</div>
+        <div className="justify-end text-lg font-bold">Total Profit: $29.85</div>
       </div>
       {InvestmentsDataList.map((InvestmentsDataList, index) => (
         <InvestmentsCard key={index} data={InvestmentsDataList} />

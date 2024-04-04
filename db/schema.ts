@@ -1,5 +1,6 @@
 import { TransactionType } from "@/lib/types";
 import type { AdapterAccount } from "@auth/core/adapters";
+import { relations } from "drizzle-orm";
 import {
   integer,
   numeric,
@@ -18,7 +19,12 @@ export const users = pgTable("user", {
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
 });
-type Users = typeof users.$inferSelect;
+export type Users = typeof users.$inferSelect;
+
+export const usersRelations = relations(users, ({ many }) => ({
+  savings: many(savings),
+  transactions: many(transactions),
+}));
 
 export const accounts = pgTable(
   "account",
@@ -68,11 +74,18 @@ export const savings = pgTable("savings", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   type: varchar("type", { length: 255 }).notNull(),
-  lastTransaction: timestamp("last_transaction", { withTimezone: true, mode: "date" }),
 });
 
-type Savings = typeof savings.$inferSelect;
-type NewSavings = typeof savings.$inferInsert;
+export type Savings = typeof savings.$inferSelect;
+export type NewSavings = typeof savings.$inferInsert;
+
+export const savingsRelations = relations(savings, ({ many, one }) => ({
+  transactions: many(transactions),
+  userId: one(users, {
+    fields: [savings.userId],
+    references: [users.id],
+  }),
+}));
 
 export const transactions = pgTable("transactions", {
   id: serial("id").primaryKey(),
@@ -84,7 +97,19 @@ export const transactions = pgTable("transactions", {
     .references(() => savings.id),
   amount: numeric("amount", { precision: 12, scale: 2 }).notNull(),
   type: varchar("type", { length: 3 }).$type<TransactionType>().notNull(),
+  date: timestamp("date", { withTimezone: true, mode: "date" }).defaultNow(),
 });
 
-type Transaction = typeof transactions.$inferSelect;
-type NewTransaction = typeof transactions.$inferInsert;
+export type Transaction = typeof transactions.$inferSelect;
+export type NewTransaction = typeof transactions.$inferInsert;
+
+export const transactionsRelations = relations(transactions, ({ one }) => ({
+  userId: one(users, {
+    fields: [transactions.userId],
+    references: [users.id],
+  }),
+  savingsId: one(savings, {
+    fields: [transactions.savingsId],
+    references: [savings.id],
+  }),
+}));

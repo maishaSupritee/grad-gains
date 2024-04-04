@@ -1,5 +1,7 @@
 import { auth } from "@/auth";
+import appLogo from "@/public/images/gradgains-logo.svg";
 import { type Session } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ModeToggle } from "../ui/toggle-mode";
@@ -7,7 +9,6 @@ import UserButton from "../user-button/user-button";
 import AuthLinks from "./auth-links";
 import MenuToggle from "./menu-toggle";
 import NavLinks from "./nav-links";
-
 /*
   if isPrivate is passed, that means we already know the auth state and just want to render the navbar content.
   if isPrivate is not passed, that means we don't know the auth state so we need to fetch it. (for cases like contact page)
@@ -50,6 +51,7 @@ function NavbarContent({ isPrivate, session }: { isPrivate: boolean; session?: S
             href={isPrivate ? "/dashboard" : "/"}
             className="flex items-center justify-center gap-2 rounded-md outline-none transition-all duration-150 ease-linear focus-visible:ring-2"
           >
+            <Image src={appLogo} alt={"Logo"} width={60} height={60}></Image>
             <p className="text-3xl font-medium tracking-tight">Grad Gains</p>
           </Link>
         </div>
@@ -91,6 +93,7 @@ function NavbarSkeleton() {
             href="/dashboard"
             className="flex items-center justify-center gap-2 rounded-md outline-none transition-all duration-150 ease-linear focus-visible:ring-2"
           >
+            <Image src={appLogo} alt={"Logo"} width={60} height={60}></Image>
             <p className="text-3xl font-medium tracking-tight">Grad Gains</p>
           </Link>
         </div>

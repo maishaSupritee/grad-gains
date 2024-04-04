@@ -94,7 +94,7 @@ export const transactions = pgTable("transactions", {
     .references(() => users.id, { onDelete: "cascade" }),
   savingsId: integer("savings_id")
     .notNull()
-    .references(() => savings.id),
+    .references(() => savings.id, { onDelete: "cascade" }),
   amount: numeric("amount", { precision: 12, scale: 2 }).notNull(),
   type: varchar("type", { length: 3 }).$type<TransactionType>().notNull(),
   date: timestamp("date", { withTimezone: true, mode: "date" }).defaultNow(),

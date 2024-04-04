@@ -60,7 +60,7 @@ export default async function ProfilePage() {
     },
   ];
   const investmentsCardData = {
-    amount: 100,
+    amount: 29.85,
     investments: investmentsList,
   };
   function InvestmentsCard() {

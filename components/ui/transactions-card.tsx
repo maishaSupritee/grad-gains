@@ -11,11 +11,10 @@ export default function TransactionsCard({ transactionData }: TransactionsCardPr
 
   if (transactionData.type == "in") {
     textStyle.color = "#16a34a";
-    amount = transactionData.amount;
   } else {
     textStyle.color = "red";
-    amount = "-" + transactionData.amount;
   }
+  amount = transactionData.amount;
 
   return (
     <div>

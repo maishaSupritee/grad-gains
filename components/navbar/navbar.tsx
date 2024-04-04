@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { type Session } from "next-auth";
 import Link from "next/link";
 import { Suspense } from "react";
+import { ModeToggle } from "../ui/toggle-mode";
 import UserButton from "../user-button/user-button";
 import AuthLinks from "./auth-links";
 import MenuToggle from "./menu-toggle";
@@ -56,6 +57,7 @@ function NavbarContent({ isPrivate, session }: { isPrivate: boolean; session?: S
           <NavLinks isPrivate={isPrivate} className="rounded-md" />
         </ul>
         <div className="hidden w-[250px] justify-end gap-4 md:flex">
+          <ModeToggle />
           {isPrivate ? <UserButton session={session} /> : <AuthLinks />}
         </div>
         <div className="flex md:hidden">

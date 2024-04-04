@@ -1,13 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { type Savings } from "@/lib/types";
+import { type Savings } from "@/db/schema";
+import { TransactionDetail } from "@/lib/types";
 import savingsIcon from "@/public/images/savings-icon.svg";
 import Image from "next/image";
 
 interface SavingsCardProps {
-  data: Savings;
+  savingsData: Savings;
+  transactionData: TransactionDetail;
 }
 
-export default function SavingsCard({ data }: SavingsCardProps) {
+export default function SavingsCard({ savingsData, transactionData }: SavingsCardProps) {
   return (
     <div>
       <Card>
@@ -15,13 +17,17 @@ export default function SavingsCard({ data }: SavingsCardProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Image src={savingsIcon} alt="Icon" width={36} height={36}></Image>
-              <CardTitle>Savings Type: {data.title}</CardTitle>
+              <CardTitle>Savings Type: {savingsData.type}</CardTitle>
             </div>
-            <span>Amount: ${data.amount}</span>
+            <span>Amount: ${transactionData.totalAmount.toFixed(2)}</span>
           </div>
         </CardHeader>
         <CardContent>
-          <p>Last Transaction: {data.date.toLocaleDateString()}</p>
+          <p>
+            Last Transaction:{" "}
+            {transactionData.lastTransaction &&
+              transactionData.lastTransaction.toLocaleDateString()}
+          </p>
         </CardContent>
       </Card>
     </div>

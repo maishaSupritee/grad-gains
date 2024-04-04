@@ -6,6 +6,7 @@ import { savings, type Savings } from "@/db/schema";
 import { CalculateTotalSavings, GetSavingsData } from "@/lib/savingsQueries";
 import { TransactionDetail } from "@/lib/types";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
 export default async function SavingsPage() {
   const session = await auth();
@@ -46,11 +47,13 @@ export default async function SavingsPage() {
         Total Savings: <span className="text-primary">${totalSavings.toFixed(2)}</span>
       </div>
       {savingsDataWithTransactions.map((savingsDataWithTransaction, index) => (
-        <SavingsCard
-          key={index}
-          savingsData={savingsDataWithTransaction.savingsData}
-          transactionData={savingsDataWithTransaction.transactionData}
-        />
+        <Link href={`/savings/${savingsDataWithTransaction.savingsData.id}`} key={index}>
+          <SavingsCard
+            key={index}
+            savingsData={savingsDataWithTransaction.savingsData}
+            transactionData={savingsDataWithTransaction.transactionData}
+          />
+        </Link>
       ))}
     </div>
   );

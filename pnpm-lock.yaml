@@ -50,6 +50,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.30.6
     version: 0.30.6(@neondatabase/serverless@0.9.0)(@types/pg@8.11.4)(@types/react@18.2.72)(pg@8.11.4)(react@18.2.0)
+  embla-carousel-react:
+    specifier: ^8.0.1
+    version: 8.0.1(react@18.2.0)
   framer-motion:
     specifier: ^11.0.20
     version: 11.0.20(react-dom@18.2.0)(react@18.2.0)
@@ -65,6 +68,9 @@ dependencies:
   next-themes:
     specifier: ^0.3.0
     version: 0.3.0(react-dom@18.2.0)(react@18.2.0)
+  node-fetch:
+    specifier: 2.6.1
+    version: 2.6.1
   pg:
     specifier: ^8.11.4
     version: 8.11.4
@@ -2607,6 +2613,28 @@ packages:
     resolution: {integrity: sha512-6Fmg8QkkumNOwuZ/5mIbMU9WI3H2fmn5ajcVya64I5Yr5CcNmO7vcLt0Y7c96DCiMO5/9G+4sI2r6eEvdg1F7A==}
     dev: true
 
+  /embla-carousel-react@8.0.1(react@18.2.0):
+    resolution: {integrity: sha512-cpFQ/HwCsjBjzpu9Z9IHmZ9DaCSf/wo4q+qUTcRW3SsNv+1Q8IY7Y8J2QIyTmz0vOWY7tliu3uE2gqRH7ZDwOQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      embla-carousel: 8.0.1
+      embla-carousel-reactive-utils: 8.0.1(embla-carousel@8.0.1)
+      react: 18.2.0
+    dev: false
+
+  /embla-carousel-reactive-utils@8.0.1(embla-carousel@8.0.1):
+    resolution: {integrity: sha512-KBSkz2h9LwVFkOrwzIJKgXbmEDlIShkreeOHnV8Cph09AdBMzb412nRkcctbeDcuG9x3CVsqLzJrSXnZeYhFPQ==}
+    peerDependencies:
+      embla-carousel: 8.0.1
+    dependencies:
+      embla-carousel: 8.0.1
+    dev: false
+
+  /embla-carousel@8.0.1:
+    resolution: {integrity: sha512-RsaMRyBCd144N95gb3XoI+H9zj3RI4y0qcfvKYEh2tIAIEenL9CW9vwzltCeoYkWYipGdkvup+HGT9ewG1YTEw==}
+    dev: false
+
   /emoji-regex@10.3.0:
     resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==}
     dev: true
@@ -4135,6 +4163,11 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /node-fetch@2.6.1:
+    resolution: {integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==}
+    engines: {node: 4.x || >=6.0.0}
     dev: false
 
   /node-releases@2.0.14:

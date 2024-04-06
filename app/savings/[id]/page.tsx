@@ -2,9 +2,9 @@ import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import TransactionsCard from "@/components/ui/transactions-card";
 import { db } from "@/db";
-import { savings, Transaction, transactions } from "@/db/schema";
+import { savings, transactions, type Transaction } from "@/db/schema";
 import { GetIndividualSaving, GetTransactionsList } from "@/lib/savingsQueries";
-import { TransactionType } from "@/lib/types";
+import type { TransactionType } from "@/lib/types";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -13,10 +13,10 @@ export default async function SavingsDetailsPage({ params }: { params: { id: num
   const session = await auth();
   const user = session?.user;
   let transactionsList: Transaction[] = [];
-  let savingsType: string = "";
-  let totalSavings: number = 0;
+  let savingsType = "";
+  let totalSavings = 0;
 
-  if (user && user.id) {
+  if (user?.id) {
     const saving = await GetIndividualSaving(params.id);
     if (saving) {
       savingsType = saving.type;
@@ -35,9 +35,9 @@ export default async function SavingsDetailsPage({ params }: { params: { id: num
       amount = formData.get("addFunds") as string;
     } else if (transactionType == "withdrawFunds") {
       type = "out";
-      amount = ("-" + formData.get("withdrawFunds")) as string;
+      amount = "-" + (formData.get("withdrawFunds") as string);
     }
-    if (user && user.id) {
+    if (user?.id) {
       await db.insert(transactions).values([
         {
           userId: user.id,
@@ -52,9 +52,9 @@ export default async function SavingsDetailsPage({ params }: { params: { id: num
     }
   };
 
-  const deleteSavings = async (formData: FormData) => {
+  const deleteSavings = async () => {
     "use server";
-    if (user && user.id && totalSavings == 0) {
+    if (user?.id && totalSavings == 0) {
       await db.delete(savings).where(eq(savings.id, params.id));
       redirect("/savings");
     }

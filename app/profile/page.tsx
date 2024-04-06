@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Savings } from "@/db/schema";
+import type { Savings } from "@/db/schema";
 import { CalculateTotalSavings, GetSavingsData } from "@/lib/savingsQueries";
-import { TransactionDetail } from "@/lib/types";
+import type { TransactionDetail } from "@/lib/types";
 import profileIcon from "@/public/images/profile-icon.svg";
 import profitIcon from "@/public/images/profit-icon.svg";
 import savingsIcon from "@/public/images/savings-icon.svg";
@@ -11,11 +11,11 @@ import Image from "next/image";
 export default async function ProfilePage() {
   const session = await auth();
   const user = session?.user;
-  let totalSavings: number = 0;
+  let totalSavings = 0;
   let savingsDataWithTransactions: { savingsData: Savings; transactionData: TransactionDetail }[] =
     [];
 
-  if (user && user.id) {
+  if (user?.id) {
     savingsDataWithTransactions = await GetSavingsData(user.id);
     totalSavings = await CalculateTotalSavings(user.id);
   }
@@ -29,7 +29,7 @@ export default async function ProfilePage() {
               <span>Savings Till Date: </span>
               <span className="pl-2 text-primary">${totalSavings.toFixed(2)}</span>
             </div>
-            <Image src={savingsIcon} alt="Icon" width={40} height={40}></Image>
+            <Image src={savingsIcon as string} alt="Icon" width={40} height={40}></Image>
           </CardHeader>
           <CardContent>
             {savingsDataWithTransactions.map((data, index) => (
@@ -72,7 +72,7 @@ export default async function ProfilePage() {
               <span>Profit Till Date: </span>
               <span className="pl-2 text-primary">${investmentsCardData.amount}</span>
             </div>
-            <Image src={profitIcon} alt="Icon" width={40} height={40}></Image>
+            <Image src={profitIcon as string} alt="Icon" width={40} height={40}></Image>
           </CardHeader>
           <CardContent>
             {investmentsList.map((investmentsData, index) => (
@@ -92,18 +92,18 @@ export default async function ProfilePage() {
   return (
     <div className="flex h-screen flex-col gap-10 overflow-auto px-10">
       <div className="mt-20 flex flex-row items-center gap-5">
-        {user && user.image && (
+        {user?.image && (
           <Image
             src={user.image}
-            alt={profileIcon}
+            alt={profileIcon as string}
             className="flex overflow-clip rounded-full"
             width={100}
             height={100}
           />
         )}
         <div className="flex flex-col">
-          <h1 className="flex-grow text-3xl font-semibold">{user && user.name}</h1>
-          <h2>{user && user.email}</h2>
+          <h1 className="flex-grow text-3xl font-semibold">{user?.name}</h1>
+          <h2>{user?.email}</h2>
         </div>
         <div className="flex flex-col gap-1 pl-20">
           <h2 className="text-2xl font-semibold">Friends</h2>

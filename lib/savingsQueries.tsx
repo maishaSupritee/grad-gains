@@ -1,7 +1,7 @@
 import { db } from "@/db";
-import { Savings, savings, Transaction, transactions } from "@/db/schema";
+import { savings, transactions, type Savings, type Transaction } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { TransactionDetail } from "./types";
+import type { TransactionDetail } from "./types";
 
 export async function GetSavingsData(
   userId: string
@@ -23,7 +23,7 @@ export async function GetSavingsData(
       // Get the date of the very last transaction if transactionsList is not empty
       const lastTransaction =
         transactionsList.length > 0
-          ? transactionsList[transactionsList.length - 1]?.date || null
+          ? transactionsList[transactionsList.length - 1]?.date ?? null
           : null;
 
       // Create a TransactionDetail object for each savings

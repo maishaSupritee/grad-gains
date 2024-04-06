@@ -1,4 +1,4 @@
-import { Transaction } from "@/db/schema";
+import type { Transaction } from "@/db/schema";
 import { Card, CardContent } from "./card";
 
 interface TransactionsCardProps {
@@ -7,7 +7,7 @@ interface TransactionsCardProps {
 
 export default function TransactionsCard({ transactionData }: TransactionsCardProps) {
   let amount = "";
-  let textStyle: React.CSSProperties = {};
+  const textStyle: React.CSSProperties = {};
 
   if (transactionData.type == "in") {
     textStyle.color = "#16a34a";

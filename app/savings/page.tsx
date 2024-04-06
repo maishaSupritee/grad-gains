@@ -4,25 +4,25 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/db";
 import { savings, type Savings } from "@/db/schema";
 import { CalculateTotalSavings, GetSavingsData } from "@/lib/savingsQueries";
-import { TransactionDetail } from "@/lib/types";
+import type { TransactionDetail } from "@/lib/types";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
 export default async function SavingsPage() {
   const session = await auth();
   const user = session?.user;
-  let totalSavings: number = 0;
+  let totalSavings = 0;
   let savingsDataWithTransactions: { savingsData: Savings; transactionData: TransactionDetail }[] =
     [];
 
-  if (user && user.id) {
+  if (user?.id) {
     savingsDataWithTransactions = await GetSavingsData(user.id);
     totalSavings = await CalculateTotalSavings(user.id);
   }
   const addSavings = async (formData: FormData) => {
     "use server";
     const savingsType = formData.get("savingsType") as string;
-    if (user && user.id && savingsType) {
+    if (user?.id && savingsType) {
       await db.insert(savings).values({
         userId: user.id,
         type: savingsType,

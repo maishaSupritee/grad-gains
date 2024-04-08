@@ -20,7 +20,7 @@ export default function BackgroundWithButtons() {
         }}
         className="relative flex flex-col items-center justify-center gap-4 px-4"
       >
-        <Image src={appLogo} alt="Logo" width={200} height={200}></Image>
+        <Image src={appLogo as string} alt="Logo" width={200} height={200}></Image>
         <div className="text-center text-6xl font-bold dark:text-white md:text-7xl">
           Welcome To GradGains
         </div>

@@ -7,6 +7,7 @@ import Google from "next-auth/providers/google";
 const config = {
   adapter: DrizzleAdapter(db),
   providers: [Discord, Google],
+  trustHost: true,
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);

@@ -6,6 +6,7 @@ const privateRoutes = ["/dashboard", "/profile", "/savings", "/investments", "/f
 // https://authjs.dev/reference/nextjs#in-middleware
 export default auth(({ auth, nextUrl }) => {
   const { pathname } = nextUrl;
+  console.log(auth, typeof auth);
 
   if (auth && (pathname === "/" || pathname === "/sign-in")) {
     return NextResponse.redirect(new URL("/dashboard", nextUrl));

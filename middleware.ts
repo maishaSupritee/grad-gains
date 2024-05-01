@@ -8,7 +8,7 @@ export default auth(({ auth, nextUrl }) => {
   const { pathname } = nextUrl;
   console.log(auth, typeof auth);
 
-  if (auth && (pathname === "/" || pathname === "/sign-in")) {
+  if (auth != null && (pathname === "/" || pathname === "/sign-in")) {
     return NextResponse.redirect(new URL("/dashboard", nextUrl));
   }
   if (auth === null && privateRoutes.some((route) => pathname.startsWith(route))) {

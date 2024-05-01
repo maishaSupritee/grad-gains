@@ -11,7 +11,7 @@ export default auth(({ auth, nextUrl }) => {
   if (auth && (pathname === "/" || pathname === "/sign-in")) {
     return NextResponse.redirect(new URL("/dashboard", nextUrl));
   }
-  if (!auth && privateRoutes.some((route) => pathname.startsWith(route))) {
+  if (auth === null && privateRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/sign-in", nextUrl));
   }
 

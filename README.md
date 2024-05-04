@@ -1,7 +1,7 @@
 # Grad Gains
 
-Team Leader - Maisha Supritee Chowdhury
-Team Members - Andy Jung , Atulya Malhan
+- Team Leader - Maisha Supritee Chowdhury
+- Team Members - Andy Jung , Atulya Malhan
 
 GradGains is a financial social media platform catering to university students. The app enables users to save and invest together with friends, additionally offering easy-to-digest financial news and content to enhance financial literacy. It fosters community support by enabling peer-to-peer learning and motivation, allowing friends to invest together and achieve long-term financial goals while also facilitating the transfer of investment profits into various savings accounts directly within the web app.
 

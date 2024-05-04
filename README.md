@@ -1,5 +1,18 @@
 # Grad Gains
 
+Team Leader - Maisha Supritee Chowdhury
+Team Members - Andy Jung , Atulya Malhan
+
+GradGains is a financial social media platform catering to university students. The app enables users to save and invest together with friends, additionally offering easy-to-digest financial news and content to enhance financial literacy. It fosters community support by enabling peer-to-peer learning and motivation, allowing friends to invest together and achieve long-term financial goals while also facilitating the transfer of investment profits into various savings accounts directly within the web app.
+
+![Grad Gains Landing Page](https://github.com/maishaSupritee/grad-gains/blob/readme/screenshots/app.png?raw=true "Grad Gains Landing Page")
+
+![Grad Gains Dashboard](https://github.com/maishaSupritee/grad-gains/blob/readme/screenshots/app2.png?raw=true "Grad Gains Dashboard")
+
+![Grad Gains Savings Page](https://github.com/maishaSupritee/grad-gains/blob/readme/screenshots/app3.png?raw=true "Grad Gains Savings Page")
+
+![Grad Gains Profile Page](https://github.com/maishaSupritee/grad-gains/blob/readme/screenshots/app4.png?raw=true "Grad Gains Profile Page")
+
 ## Getting Started
 
 This project uses [pnpm](https://pnpm.io/) as the package manager. [Install](https://pnpm.io/installation#using-a-standalone-script) pnpm if you haven't.
